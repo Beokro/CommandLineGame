@@ -1,6 +1,6 @@
-#pragma once
+#ifndef BAG_H_
+#define BAG_H_
 
-#include <iostream>
 #include <map>
 #include "Item.h"
 
@@ -13,8 +13,12 @@ class Bag{
   bool removeFromBag(string itemName);
   bool removeFromBag(string itemName, size_t number);
   void emptyBag();
+  //should call Item's Use function and pass the Person pointer
+  void UseItem(Person *p, string name);
 	  
  private:
-  static size_t MAX_BAG_CAPACITY = 64;
+  const static size_t MAX_BAG_CAPACITY = 64;
   map<string, Item> myBag;
 };
+
+#endif

@@ -2,10 +2,10 @@
 #include "Item.h"
 
 size_t Bag::getUsed(){
-  return myBag.size()
+	return myBag.size();
 }
 
-bool putInBag(Item item){
+bool Bag::putInBag(Item &item){
   if(myBag.size() < MAX_BAG_CAPACITY){
     map<string, Item>::iterator it = myBag.at(item.getName());
     if(it == myBag.end()){

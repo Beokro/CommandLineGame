@@ -14,6 +14,8 @@ private:
 	int Exp;
 	int level;
 	Equiment equ;
+public:
+	void CheckUpdate();
 
 };
 

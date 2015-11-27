@@ -1,6 +1,8 @@
-#pragma once
-#include <iostream>
+#ifndef ITEM_H_
+#define ITEM_H_
 
+#include <iostream>
+#include "Person.h"
 using namespace std;
 
 class Item{
@@ -18,6 +20,9 @@ class Item{
   void Remove(size_t number = 1);
   void Overlay(size_t number = 1);
   bool operator <(Item &item);
-	
+  //change person's status 
+  void Use(Person* p);
 };
+
+#endif
   
