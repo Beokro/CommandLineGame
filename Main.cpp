@@ -23,7 +23,7 @@ int main() {
 	cout << "You can use one of the following command\n1.View the World Status\n2.View your Age\n3.Attack villages\n";
 
 	while (cin >> command) {
-		if (command != "1"&&command != "2", &&command != "3") {
+		if (command != "1"&& command != "2" &&command != "3") {
 			cout << "Please enter the valid command number\n";
 			continue;
 		}
