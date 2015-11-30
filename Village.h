@@ -22,10 +22,15 @@ public:
 	Village(string name, int population, int HeroNumber, vector<Hero>heros, int civil, int wealth);
 	Village(string name, int population, int HeroNumber, int civil, int wealth);
 	Village(string name);
-	void Develop_In_A_Year();
+	//true when nothing happen, false when villages decide to attack the Boss
+	bool Develop_In_A_Year();
 	void GiveBirthToHero();
 	void LookingForHistoricalRemains();
-	void ReportStatus();
+	string ReportStatus();
+	string GetName() { return name; }
+	int GetPopulation() { return population; }
+	vector<Hero> HeroAttack();
+
 
 };
 

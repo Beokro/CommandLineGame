@@ -4,12 +4,13 @@
 #include"Village.h"
 #include"Hero.h"
 #include"Boss.h"
+#include<iostream>
 
 using namespace std;
 
 class World {
 private:
-	vector<Village>villages();
+	vector<Village>villages;
 	Boss Dragon;
 	vector<Hero>heroAttack;
 	bool BossAlive = true;
@@ -26,8 +27,8 @@ public:
 
 	int GetAgeOfBoss() { return Dragon.GetAge(); }
 
-	//true if Boss win, false if boss is killed, call CheckBossStatus at last
-	bool fight();
+
+	void fight();
 
 	void CheckBossStatusAfterFight();
 
@@ -41,7 +42,7 @@ public:
 	//Check if Game is ended
 	bool CheckGameEnded() { return !BossAlive; }
 
-	string ShowGameResult();
+	void ShowGameResult();
 };
 
 
