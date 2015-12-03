@@ -3,10 +3,26 @@
 
 using namespace std;
 
-Item::Item(string name, size_t number, string description){
+Item::Item(){
+  name = "";
+  number = 0;
+  description = "";
+  CHP = 0;
+  CMP = 0;
+  Cres = 0;
+  Catk = 0;
+  Cdef = 0;
+}
+
+Item::Item(string name, size_t number, string description, int CHP, int CMP, int Cres, int Catk, int Cdef){
   this->name = name;
   this->number = number;
   this->description = description;
+  this->CHP = CHP;
+  this->CMP = CMP;
+  this->Cres = Cres;
+  this->Catk = Catk;
+  this->Cdef = Cdef;
 }
 
 string Item::getDescription(){
@@ -36,3 +52,11 @@ bool Item::operator <(Item &item){
   return this->name < item.getName();
 }
   
+void Item::Use(Person* p){
+  p -> ChangeHP(CHP);
+  p -> ChangeMP(CMP);
+  p -> ChangeRes(Cres);
+  p -> ChangeAtk(Catk);
+  p -> ChangeDef(Cdef);
+}
+	  

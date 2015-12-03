@@ -14,6 +14,7 @@ private:
 	int Exp;
 	int level;
 	Equiment equ;
+	Bag bag;
 public:
 	void CheckUpdate();
 

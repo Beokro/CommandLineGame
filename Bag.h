@@ -13,6 +13,7 @@ class Bag{
   bool removeFromBag(Item &item);
   bool removeFromBag(Item &item, size_t number);
   void emptyBag();
+  Item getItem(string name);
   //should call Item's Use function and pass the Person pointer
   void UseItem(Person *p, string name);
 	  
