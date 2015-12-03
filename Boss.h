@@ -7,6 +7,7 @@ using std::vector;
 using std::string;
 
 static const int MaxHP = 1000000;
+static const int MaxAge = 5000;
 
 class Boss {
 private:
@@ -15,11 +16,18 @@ private:
 	int age;
 	int PhysicalDamage;
 	vector<Skill> skills;
+	int Wealth;
 
 public:
+	Boss();
+	Boss(int HP, int MP, int PhysicalDamage, int age);
 	Boss(int HP, int MP, int PhysicalDamage, int age, vector<Skill> skills);
 	int * UseSkill(string skillName);
 	int Attack() { return PhysicalDamage; };
+	int GetAge() { return age; }
+	int GetWealth() { return Wealth; }
+	string ReportStatus();
+	void PassAnotherYear();
 };
 
 

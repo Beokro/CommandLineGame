@@ -16,7 +16,7 @@ public:
 	Person(string name, int HP, int MP, int age);
 	void GetDamaged(int damage);
 	bool UsedMP(int used);
-	void getOlder(int age = 1);
+	void getOlder();
 	bool CheckIfAlive() { return alive; }
 	string GetFightingStatus();
 	string GetName() { return name; }

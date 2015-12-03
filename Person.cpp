@@ -25,8 +25,8 @@ bool Person::UsedMP(int used) {
 	MP -= used;
 	return true;
 }
-void Person::getOlder(int age) {
-	this->age += age;
+void Person::getOlder() {
+	this->age+=1;
 }
 
 string Person::GetFightingStatus() {
