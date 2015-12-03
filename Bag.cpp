@@ -7,21 +7,37 @@ size_t Bag::getUsed(){
 
 bool Bag::putInBag(Item &item){
   if(myBag.size() < MAX_BAG_CAPACITY){
-    map<string, Item>::iterator it = myBag.at(item.getName());
+    map<string, Item>::iterator it = myBag.find(item.getName());
     if(it == myBag.end()){
       myBag.insert(pair<string, Item>(item.getName(), item));
       return true;
     }
     else{
-      if((*it).getNumber + item.getNumber() > MAX_ITEM_CAPACITY)
-	return false;
-      (*it).Overlay(item.getNumber());
-      return true;
+        return (*it).second.Overlay(item.getNumber());
+    }
+   
   }
-  else
+  else{
     return false;
+  }
 }
-bool Bag::removeFromBag(Item item){
+
+bool Bag::removeFromBag(Item &item, size_t number){
+  map<string, Item>::iterator it = myBag.find(item.getName());
+  if(it == myBag.end())
+    return false;
+  else {
+    if((*it).second.getNumber() <= number){
+      myBag.erase(it);
+      return true;
+    }
+    (*it).second.Remove(number);
+    return true;
+  }
+}
+
+
+bool Bag::removeFromBag(Item &item){
   map<string, Item>::iterator it = myBag.find(item.getName());
   if(it != myBag.end()){
     myBag.erase(it);
@@ -31,17 +47,4 @@ bool Bag::removeFromBag(Item item){
     return false;
 }
 
-bool Bag::removeFrombag(Item item, size_t number){
-  map<string, Item>::iterator it = myBag.find(item.getName());
-  if(it == myBag.end())
-    return false;
-  else {
-    if((*it).getNumber() <= number){
-      myBag.erase(it);
-      return true;
-    }
-    (*it).Remove(number);
-    return true;
-  }
-}
-	
+

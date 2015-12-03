@@ -25,7 +25,7 @@ bool Person::UsedMP(int used) {
 	MP -= used;
 	return true;
 }
-void Person::getOlder(int age = 1) {
+void Person::getOlder(int age) {
 	this->age += age;
 }
 

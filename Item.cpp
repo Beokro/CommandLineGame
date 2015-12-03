@@ -1,7 +1,7 @@
-#include <iotream>
+#include <iostream>
 #include "Item.h"
 
-using namespce std;
+using namespace std;
 
 Item::Item(string name, size_t number, string description){
   this->name = name;
@@ -21,15 +21,18 @@ size_t Item::getNumber(){
   return number;
 }
 
-void Item::Remove(size_t number = 1){
+void Item::Remove(size_t number){
     this->number -= number;
 }
   
-void Item::Overlay(size_t number = 1){
+bool Item::Overlay(size_t number ){
+    if(this -> number + number > MAX_ITEM_CAPACITY)
+        return false;
     this->number += number;
+    return true;
 }
 
-bool operator <(Item &item){
+bool Item::operator <(Item &item){
   return this->name < item.getName();
 }
   
