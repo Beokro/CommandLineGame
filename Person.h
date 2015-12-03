@@ -23,7 +23,7 @@ public:
 	bool ChangeRes(int change);
 	bool ChangeAtk(int change);
 	bool ChangeDef(int change);
-	void getOlder();
+	virtual void getOlder();
 	bool CheckIfAlive() { return alive; }
 	string GetFightingStatus();
 	string GetName() { return name; }

@@ -60,9 +60,6 @@ bool Person::ChangeDef(int change){
   return true;
 }
 
-void Person::getOlder() {
-	this->age+=1;
-}
 
 string Person::GetFightingStatus() {
 	string status;

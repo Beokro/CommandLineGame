@@ -11,10 +11,7 @@ class Equiment {
 
 class Hero : public Person {
 private:
-	int Exp;
-	int level;
-	Equiment equ;
-	Bag bag;
+  Bag bag;
 public:
 	void CheckUpdate();
 
