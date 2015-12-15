@@ -19,6 +19,11 @@ bool World::PassAnotherYear() {
 		}
 	}
 	Dragon.PassAnotherYear();
+
+	if (WawrStart) {
+		fight();
+		CheckBossStatusAfterFight();
+	}
 	return !WawrStart;
 }
 
@@ -44,12 +49,21 @@ string World::InformationAboutThisWorld() {
 
 }
 
-//true if Boss win, false if boss is killed, call CheckBossStatus at last
+//change the boss's status and herp's status in heroAttack vector(Change their HP to 0, 
+//but don't delete them from vector)
 void World::fight() {
 
 }
 
-void World::CheckBossStatusAfterFight();
+void World::CheckBossStatusAfterFight() {
+	if (this->Dragon.GetHP() == 0) {
+		GameEnded = true;
+		return;
+	}
+	if (this->Dragon.GetHP() < (MaxHP / 5)) {
+		PassAnotherYear();
+	}
+}
 
 string World::PrintVillageName() {
 	int size = villages.size();
@@ -73,7 +87,9 @@ bool World::CheckVillageExist(string villageName) {
 }
 
 //true if attack success, false if attack failed, call CheckBossStatus
-bool World::AttackVillage(string villageName);
+bool World::AttackVillage(string villageName) {
+
+}
 
 
 void World::ShowGameResult() {

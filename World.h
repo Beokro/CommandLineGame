@@ -13,7 +13,7 @@ private:
 	vector<Village>villages;
 	Boss Dragon;
 	vector<Hero>heroAttack;
-	bool BossAlive = true;
+	bool GameEnded = false;
 
 public:
 	World(vector<Village>villages, Boss Dragon);
@@ -40,7 +40,7 @@ public:
 	bool AttackVillage(string villageName);
 
 	//Check if Game is ended
-	bool CheckGameEnded() { return !BossAlive; }
+	bool CheckGameEnded() { return GameEnded; }
 
 	void ShowGameResult();
 };

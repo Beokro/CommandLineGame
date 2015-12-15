@@ -2,6 +2,7 @@
 #define SKILL_H_
 
 class Skill {
+private:
 	// =0 if skill is target to self, = anything else means skill is target to enemy
 	int TargetEmemy;
 

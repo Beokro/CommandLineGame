@@ -1,8 +1,10 @@
 #ifndef BOSS_H_
 #define BOSS_H_
-#include "Skill.h"
+
+#include"Skill.h"
 #include<vector>
 #include<string>
+
 using std::vector;
 using std::string;
 
@@ -26,6 +28,7 @@ public:
 	int Attack() { return PhysicalDamage; };
 	int GetAge() { return age; }
 	int GetWealth() { return Wealth; }
+	int GetHP() { return HP; }
 	string ReportStatus();
 	void PassAnotherYear();
 };

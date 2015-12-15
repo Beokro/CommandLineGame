@@ -1,23 +1,13 @@
 #ifndef VILLAGE_H_
 #define VILLAGE_H_
 
-<<<<<<< HEAD
 #include <iostream>
 #include <vector>
 #include "Person.h"
 #include "Hero.h"
+#include <time.h>
 
 using namespace std;
-
-class Village{
- private:
-  size_t population;
-  size_t wealth;
-  
-
-#endif
-=======
-#include"Hero.h"
 
 static const int Stone_Age=500;
 static const int Bronze_Age = 1000;
@@ -40,15 +30,24 @@ public:
 	Village(string name);
 	//true when nothing happen, false when villages decide to attack the Boss
 	bool Develop_In_A_Year();
+
+	//Random generate a hero
 	void GiveBirthToHero();
-	void LookingForHistoricalRemains();
+	
+	//change the status of the village if found
+	bool LookingForHistoricalRemains();
+
+	//return satus about the village as string
 	string ReportStatus();
+
+
 	string GetName() { return name; }
 	int GetPopulation() { return population; }
+	
+	//Add the hero that is going to fight with boss inti the vector
 	vector<Hero> HeroAttack();
 
 
 };
 
 #endif
->>>>>>> 9096e1e4cc920f6b3c797bf19aea18a36484e5d5

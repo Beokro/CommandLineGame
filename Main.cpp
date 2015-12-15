@@ -41,10 +41,7 @@ int main() {
 				continue;
 			}
 			while (yearToSleep > 0) {
-				if (!thisWorld.PassAnotherYear()) {
-					thisWorld.fight();
-					break;
-				}
+				thisWorld.PassAnotherYear();
 				yearToSleep--;
 			}
 			if (thisWorld.CheckGameEnded())
@@ -65,6 +62,6 @@ int main() {
 		}
 
 	}
-	cout << thisWorld.ShowGameResult() << endl;
+	thisWorld.ShowGameResult();
 
 }
