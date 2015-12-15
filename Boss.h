@@ -4,6 +4,7 @@
 #include"Skill.h"
 #include<vector>
 #include<string>
+#include<algorithm>
 
 using std::vector;
 using std::string;
@@ -13,6 +14,8 @@ static const int MaxAge = 5000;
 
 class Boss {
 private:
+	//At first is 1000000, decrease by certain amount every year
+	int TotalHP;
 	int HP;
 	int MP;
 	int age;
@@ -28,8 +31,11 @@ public:
 	int Attack() { return PhysicalDamage; };
 	int GetAge() { return age; }
 	int GetWealth() { return Wealth; }
+	int GetTotalHP() { return TotalHP; }
 	int GetHP() { return HP; }
 	string ReportStatus();
+	//status(PhysicalDamage and total HP) decrease by certain amount, 
+	//recover 5% of Total HP if is damaged
 	void PassAnotherYear();
 };
 

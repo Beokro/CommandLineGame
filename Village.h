@@ -47,6 +47,9 @@ public:
 	//Add the hero that is going to fight with boss inti the vector
 	vector<Hero> HeroAttack();
 
+	//Check if Village can feed the population, if not population decrease, Civcil will decrease too
+	void CheckSuppors();
+
 
 };
 

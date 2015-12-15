@@ -27,6 +27,7 @@ public:
 
 	int GetAgeOfBoss() { return Dragon.GetAge(); }
 
+	void PassYears(int n);
 
 	void fight();
 

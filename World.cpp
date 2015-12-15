@@ -11,7 +11,7 @@ bool World::PassAnotherYear() {
 	vector<Hero> HeroHolder;
 	bool WawrStart = false;
 	for (int i = 0; i < size; i++) {
-		if (!villages[i].Develop_In_A_Year()) {
+		if (villages[i].Develop_In_A_Year()) {
 			HeroHolder = villages[i].HeroAttack();
 			for (int j = 0; j < HeroHolder.size(); j++)
 				heroAttack.push_back(HeroHolder[j]);
@@ -51,6 +51,7 @@ string World::InformationAboutThisWorld() {
 
 //change the boss's status and herp's status in heroAttack vector(Change their HP to 0, 
 //but don't delete them from vector)
+//***********Remember change the WarStart back to false
 void World::fight() {
 
 }
@@ -60,7 +61,7 @@ void World::CheckBossStatusAfterFight() {
 		GameEnded = true;
 		return;
 	}
-	if (this->Dragon.GetHP() < (MaxHP / 5)) {
+	if (this->Dragon.GetHP() < (Dragon.GetTotalHP() / 5)) {
 		PassAnotherYear();
 	}
 }
@@ -98,4 +99,12 @@ void World::ShowGameResult() {
 	cout << "You own " << Dragon.GetWealth() << " gold conins\n";
 	cout << "There are  " << size << " villages survied under your madness\n";
 	cout << "You will reborn, see you in next reincarnation\n";
+}
+
+void World::PassYears(int n) {
+	for (int i = 0; i < n; i++) {
+		PassAnotherYear();
+		if (CheckGameEnded)
+			break;
+	}
 }

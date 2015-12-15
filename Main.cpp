@@ -40,10 +40,7 @@ int main() {
 				cout << "Invalid number, back to main selection\n";
 				continue;
 			}
-			while (yearToSleep > 0) {
-				thisWorld.PassAnotherYear();
-				yearToSleep--;
-			}
+			thisWorld.PassYears(yearToSleep);
 			if (thisWorld.CheckGameEnded())
 				break;
 

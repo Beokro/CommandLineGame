@@ -13,8 +13,9 @@ Village::Village(string name, int population, int HeroNumber, int civil, int wea
 	Village(name, population, HeroNumber, temp, civil, wealth);
 }
 Village::Village(string name) {
+	srand(time(NULL));
 	vector<Hero>temp;
-	Village(name, 100, 0, temp, 0, 120);
+	Village(name, 100+rand()%100, 0, temp, rand()%50, 120+rand()%120);
 }
 
 //true when nothing happen, false when villages decide to attack the Boss
@@ -24,23 +25,21 @@ bool Village::Develop_In_A_Year() {
 	Civil += rand() % 5;
 
 	//Population += 0.5% to 2% * Civil/500
-	temp = rand() % 200;
-	if (temp < 50)
-		temp = 50;
+	temp =50+ rand() % 150;
 	population += (temp * population / 1000 * ((Civil / 500) + 1));
 
 	//Wealth += 0.6% ~2.4% * Civil/500
-	temp = rand() % 240;
-	if (temp < 60)
-		temp = 60;
+	temp =60+ rand() % 180;
 	wealth += (temp * population / 1000 * ((Civil / 500) + 1));
 
 	for (Hero h : heros)
 		h.getOlder();
 
-	//After entering Gods age, 1/5 chance the village will attack the Dragon
+	CheckSuppors;
+
+	//After entering Gods_age, 1/100 chance the village will attack the Dragon
 	if (Civil > 2000) {
-		if (rand() % 5 == 2) {
+		if (rand() % 100 == 0) {
 			return true;
 		}
 
@@ -84,4 +83,14 @@ string Village::ReportStatus() {
 //Add the hero that is going to fight with boss inti the vector
 vector<Hero> Village::HeroAttack() {
 	return heros;
+}
+
+
+void Village::CheckSuppors() {
+	srand(time(NULL));
+	if (population > wealth) {
+		int temp = rand() % (population - wealth);
+		population -= temp;
+		Civil -= 1;
+	}
 }
