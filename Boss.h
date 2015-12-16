@@ -33,6 +33,7 @@ public:
 	int GetWealth() { return Wealth; }
 	int GetTotalHP() { return TotalHP; }
 	int GetHP() { return HP; }
+	void GainWealth(int coins) { Wealth += coins; }
 	string ReportStatus();
 	//status(PhysicalDamage and total HP) decrease by certain amount, 
 	//recover 5% of Total HP if is damaged

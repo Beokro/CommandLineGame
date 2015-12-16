@@ -19,13 +19,14 @@ static const int Industrial_Revolution = 3000;
 class Village {
 private:
 	string name;
-	int population = 300;
-	int HeroNumber = 0;
-	vector<Hero>heros;
-	int Civil = 0;
-	int wealth = 600;
+	int population ;
+	int HeroNumber ;
+	vector<Hero*>heros;
+	int Civil ;
+	int wealth ;
+	int WillPower=0;
 public:
-	Village(string name, int population, int HeroNumber, vector<Hero>heros, int civil, int wealth);
+	Village(string name, int population, int HeroNumber, vector<Hero*>heros, int civil, int wealth);
 	Village(string name, int population, int HeroNumber, int civil, int wealth);
 	Village(string name);
 	//true when nothing happen, false when villages decide to attack the Boss
@@ -43,9 +44,10 @@ public:
 
 	string GetName() { return name; }
 	int GetPopulation() { return population; }
+	int GetWealth() { return wealth; }
 	
 	//Add the hero that is going to fight with boss inti the vector
-	vector<Hero> HeroAttack();
+	vector<Hero*>& HeroAttack();
 
 	//Check if Village can feed the population, if not population decrease, Civcil will decrease too
 	void CheckSuppors();

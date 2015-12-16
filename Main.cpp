@@ -51,8 +51,10 @@ int main() {
 			cout << thisWorld.PrintVillageName()<<endl;
 			cout << "Enter the name of the village you want to attack\n";
 			cin >> villageName;
-			if (!thisWorld.CheckVillageExist(villageName))
+			if (!thisWorld.CheckVillageExist(villageName)) {
+				cout << "Village " << villageName << " does not exist\n";
 				continue;
+			}
 			thisWorld.AttackVillage(villageName);
 			if (thisWorld.CheckGameEnded())
 				break;

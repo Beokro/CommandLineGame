@@ -8,8 +8,10 @@ World::World(vector<Village>villages, Boss Dragon) {
 //true when nothing happen, false when human start to attack Boss
 bool World::PassAnotherYear() {
 	int size = villages.size();
-	vector<Hero> HeroHolder;
+	vector<Hero*> HeroHolder;
 	bool WawrStart = false;
+
+	//Every village pass a year
 	for (int i = 0; i < size; i++) {
 		if (villages[i].Develop_In_A_Year()) {
 			HeroHolder = villages[i].HeroAttack();
@@ -18,7 +20,14 @@ bool World::PassAnotherYear() {
 			WawrStart = true;
 		}
 	}
+
+	//Boss pass another year
 	Dragon.PassAnotherYear();
+
+	//1/100 chance add a new village
+	if (rand() % 100 == 0) {
+		AddRandomVillage();
+	}
 
 	if (WawrStart) {
 		fight();
@@ -26,6 +35,18 @@ bool World::PassAnotherYear() {
 	}
 	return !WawrStart;
 }
+
+
+void World::AddRandomVillage() {
+	int size = VillageNames.size(), temp = rand() % size;
+	//if run out of the names, return without doing anything
+	if (size == 0)
+		return;
+	string name = VillageNames[temp];
+	VillageNames.erase(VillageNames.begin() + temp);
+	AddVillage(Village(name));
+}
+
 
 void World::AddVillage(Village v) {
 	if (CheckVillageExist(v.GetName())) {
@@ -62,7 +83,8 @@ void World::CheckBossStatusAfterFight() {
 		return;
 	}
 	if (this->Dragon.GetHP() < (Dragon.GetTotalHP() / 5)) {
-		PassAnotherYear();
+		cout << "You are injured, you must go to sleep for 10 years";
+		PassYears(10);
 	}
 }
 
@@ -87,9 +109,35 @@ bool World::CheckVillageExist(string villageName) {
 	return false;
 }
 
-//true if attack success, false if attack failed, call CheckBossStatus
+//true if attack success, false if attack failed or cancel
 bool World::AttackVillage(string villageName) {
+	Village& v = GetVillageByName(villageName);
+	string command = "";
+	cout << v.ReportStatus() << endl;
+	cout << "Now you have two options. Enter 1 to destroy this village. Enter 2 to Plunder this village\n Enter B to back to main menu\n";
+	cin >> command;
+	while (command != "1"&&command != "2"&&command != "B"&&command != "b") {
+		cout << "Invalid command, please try again\n";
+		cin >> command;
+		if (command == "B")
+			return false;
+	}
+	if (command == "1") {
+		heroAttack.clear();
+		heroAttack = v.HeroAttack();
+		fight();
+		if (Dragon.GetHP() > 0) {
+			cout << "You've successfully destroy this village\n";
+			cout << "You have gain " << v.GetWealth() << " coins\n";
+			Dragon.GainWealth(v.GetWealth());
+			RemoveVillage(v.GetName());
+		}
+		CheckBossStatusAfterFight();
+	}
+	
+	else if (command == "2") {
 
+	}
 }
 
 
@@ -107,4 +155,23 @@ void World::PassYears(int n) {
 		if (CheckGameEnded)
 			break;
 	}
+}
+
+Village& World::GetVillageByName(string name) {
+	for (int i = 0; i < villages.size(); i++) {
+		if (villages[i].GetName() == name)
+			return villages[i];
+	}
+}
+
+
+void World::RemoveVillage(string name) {
+	int size = villages.size();
+	for (int i = 0; i < size; i++) {
+		if (villages[i].GetName == name) {
+			villages.erase(villages.begin() + i);
+			return;
+		}
+	}
+	cout << "The village with name " << name << " does not exist, unknown error\n";
 }

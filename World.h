@@ -12,8 +12,10 @@ class World {
 private:
 	vector<Village>villages;
 	Boss Dragon;
-	vector<Hero>heroAttack;
+	vector<Hero*>heroAttack;
 	bool GameEnded = false;
+	vector<string>VillageNames = {"Athens","Atlantic","Peking","Berlin","London","Los Angeles","Tokyo","Toronto","Washington","Asgard","Camelot","Heaven",
+		"Storm", "Shambhala", "Zion", "Utopia", "Agartha", "Aztlan", "Camelot","Azeroth"};
 
 public:
 	World(vector<Village>villages, Boss Dragon);
@@ -31,6 +33,8 @@ public:
 
 	void fight();
 
+	void AddRandomVillage();
+
 	void CheckBossStatusAfterFight();
 
 	string PrintVillageName();
@@ -44,6 +48,10 @@ public:
 	bool CheckGameEnded() { return GameEnded; }
 
 	void ShowGameResult();
+
+	Village& GetVillageByName(string name);
+
+	void RemoveVillage(string name);
 };
 
 

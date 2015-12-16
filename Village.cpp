@@ -1,20 +1,21 @@
 #include "Village.h"
 
-Village::Village(string name, int population, int HeroNumber, vector<Hero>heros, int civil, int wealth) {
+Village::Village(string name, int population, int HeroNumber, vector<Hero*>heros, int civil, int wealth) {
 	this->name = name;
 	this->population = population;
 	this->HeroNumber = HeroNumber;
 	this->heros = heros;
 	this->Civil = civil;
 	this->wealth = wealth;
+	this->WillPower = population;
 }
 Village::Village(string name, int population, int HeroNumber, int civil, int wealth) {
-	vector<Hero>temp;
+	vector<Hero*>temp;
 	Village(name, population, HeroNumber, temp, civil, wealth);
 }
 Village::Village(string name) {
 	srand(time(NULL));
-	vector<Hero>temp;
+	vector<Hero*>temp;
 	Village(name, 100+rand()%100, 0, temp, rand()%50, 120+rand()%120);
 }
 
@@ -24,18 +25,25 @@ bool Village::Develop_In_A_Year() {
 	//Civil + = 0~5
 	Civil += rand() % 5;
 
-	//Population += 0.5% to 2% * Civil/500
+	//Population += 0.5% to 2% * Civil/500, WillPower Add the same amount
 	temp =50+ rand() % 150;
-	population += (temp * population / 1000 * ((Civil / 500) + 1));
+	temp = (temp * population / 1000 * ((Civil / 500) + 1));
+	population += temp;
+	WillPower += temp;
 
 	//Wealth += 0.6% ~2.4% * Civil/500
 	temp =60+ rand() % 180;
 	wealth += (temp * population / 1000 * ((Civil / 500) + 1));
 
-	for (Hero h : heros)
-		h.getOlder();
+	for (Hero* h : heros)
+		h->getOlder();
 
-	CheckSuppors;
+	CheckSuppors();
+
+	if (WillPower >= 1000) {
+		WillPower -= 1000;
+		GiveBirthToHero();
+	}
 
 	//After entering Gods_age, 1/100 chance the village will attack the Dragon
 	if (Civil > 2000) {
@@ -81,7 +89,7 @@ string Village::ReportStatus() {
 
 
 //Add the hero that is going to fight with boss inti the vector
-vector<Hero> Village::HeroAttack() {
+vector<Hero*>& Village::HeroAttack() {
 	return heros;
 }
 
