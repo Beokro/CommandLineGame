@@ -202,7 +202,7 @@ void World::ShowGameResult() {
 void World::PassYears(int n) {
 	for (int i = 0; i < n; i++) {
 		PassAnotherYear();
-		if (CheckGameEnded)
+		if (CheckGameEnded())
 			break;
 	}
 }
@@ -218,7 +218,7 @@ Village& World::GetVillageByName(string name) {
 void World::RemoveVillage(string name) {
 	int size = villages.size();
 	for (int i = 0; i < size; i++) {
-		if (villages[i].GetName == name) {
+		if (villages[i].GetName()== name) {
 			villages.erase(villages.begin() + i);
 			return;
 		}

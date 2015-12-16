@@ -58,7 +58,7 @@ bool Village::Develop_In_A_Year() {
 
 //Random generate a hero
 void Village::GiveBirthToHero() {
-	Hero rd;
+	Hero* rd = new Hero();
 	this->heros.push_back(rd);
 }
 
