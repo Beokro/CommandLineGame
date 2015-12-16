@@ -102,3 +102,18 @@ void Village::CheckSuppors() {
 		Civil -= 1;
 	}
 }
+
+int Village::LoseWealth(int n) {
+	if (wealth < n) {
+		wealth = 0;
+		return wealth;
+	}
+	wealth -= n;
+	return n;
+}
+
+void Village::LosePopulation(int n) {
+	if (n > population)
+		population = 0;
+	else population -= n;
+}

@@ -78,6 +78,7 @@ void World::fight() {
 }
 
 void World::CheckBossStatusAfterFight() {
+	cout << Dragon.ReportStatus() << endl;
 	if (this->Dragon.GetHP() == 0) {
 		GameEnded = true;
 		return;
@@ -111,6 +112,7 @@ bool World::CheckVillageExist(string villageName) {
 
 //true if attack success, false if attack failed or cancel
 bool World::AttackVillage(string villageName) {
+	int coinsToTake = 0;
 	Village& v = GetVillageByName(villageName);
 	string command = "";
 	cout << v.ReportStatus() << endl;
@@ -136,6 +138,54 @@ bool World::AttackVillage(string villageName) {
 	}
 	
 	else if (command == "2") {
+		cout << "If you want to fight with all heroes in this village, enter 1.";
+		cout << "If you want to instead withstand 3 turns of their attack, enter 2. Enter B to back";
+		cin >> command;
+		while (command != "1"&&command != "2"&&command != "B"&&command != "b") {
+			cout << "Invalid command, please try again\n";
+			cin >> command;
+			if (command == "B" || command == "b") {
+				cout << "You have cancel the attack\n";
+				return false;
+			}
+		}
+
+		if (command == "1") {
+			heroAttack.clear();
+			heroAttack = v.HeroAttack();
+			fight();
+			//Because of the attack 3%~15% of population of this village will die
+			int twelve_Percent_Population = v.GetPopulation()*0.12, three_percentage_population = v.GetPopulation()*0.03;
+			int peopleDie = three_percentage_population + rand() % twelve_Percent_Population;
+			v.LosePopulation(peopleDie);
+			cout << "Because of your attack, " << peopleDie << " people dies\n";
+
+
+			if (Dragon.GetHP() > 0) {
+				cout << "You have succesfully beat all heroes in this village\n";
+				cout << v.ReportStatus() << endl;
+				cout << "Enter the amount of gold you want to take\n";
+				cin >> coinsToTake;
+				coinsToTake = v.LoseWealth(coinsToTake);
+				Dragon.GainWealth(coinsToTake);
+			}
+			CheckBossStatusAfterFight();
+		}
+
+		else{
+			heroAttack.clear();
+			heroAttack = v.HeroAttack();
+			WithStandThreeTurnAttack();
+			if (Dragon.GetHP() > 0) {
+				cout << "You have succesfully withstand three turns of attack\n";
+				cout << "Enter the amount of gold you want to take\n";
+				cin >> coinsToTake;
+				coinsToTake = v.LoseWealth(coinsToTake);
+				Dragon.GainWealth(coinsToTake);
+			}
+			CheckBossStatusAfterFight();
+		}
+
 
 	}
 }

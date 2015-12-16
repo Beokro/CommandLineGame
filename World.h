@@ -52,6 +52,9 @@ public:
 	Village& GetVillageByName(string name);
 
 	void RemoveVillage(string name);
+
+	//Boss will withstand 3 turns of attack, (Hero will be provided in heroAttack vector). change Boss's status
+	void WithStandThreeTurnAttack();
 };
 
 

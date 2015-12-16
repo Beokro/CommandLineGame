@@ -52,6 +52,10 @@ public:
 	//Check if Village can feed the population, if not population decrease, Civcil will decrease too
 	void CheckSuppors();
 
+	int LoseWealth(int n);
+
+	void LosePopulation(int n);
+
 
 };
 
